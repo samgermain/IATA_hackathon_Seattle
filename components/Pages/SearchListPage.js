@@ -33,7 +33,7 @@ const BookingCell = (props) => {
     return (
         <TouchableOpacity 
             style={styles.bookingCellContainer}
-            onPress={() => props.navigation.navigate("Flight", {booking: props.booking})}
+            onPress={() => props.navigation.navigate("Flight", {booking: props.booking, shoppingID: props.shoppingID})}
         >
             <View style={styles.bookingCell}>
                 <View>
@@ -68,7 +68,7 @@ class SearchListPage extends React.Component {
             <View>
                 <SliderBox/>
                 <ScrollView>
-                    {navigation.getParam('request').offers.filter(offer => offer.price < store.getState().price.price).filter(offer => offer.overallRating > store.getState().rating.rating).map(booking => { randomKey=randomKey+1; return <BookingCell key={randomKey} navigation={navigation} booking={booking}/>})}
+                    {navigation.getParam('request').offers.filter(offer => offer.price < store.getState().price.price).filter(offer => offer.overallRating > store.getState().rating.rating).map(booking => { randomKey=randomKey+1; return <BookingCell key={randomKey} navigation={navigation} booking={booking} shoppingID={navigation.getParam('request').shoppingID}/>})}
                 </ScrollView>
             </View>
         );
