@@ -10,6 +10,11 @@ export class ConfirmationPage extends Component {
                 <Text style={styles.booked}>Booked!</Text>
                 <Text>Your order ID is</Text>
                 <Text style={styles.orderID}>{navigation.state.params.confNum}</Text>
+
+                <View style={styles.qr}>
+                    <Text>Print your QR code</Text>
+                    <Image source={require('../../assets/qrcode.png')} />
+                </View>
             </View>
         );
     }
@@ -31,6 +36,10 @@ const styles = StyleSheet.create({
     orderID:{
         fontWeight: 'bold',
         fontSize: 20
+    },
+    qr: {
+        marginTop: 20,
+        alignItems: 'center'
     }
 
 })
