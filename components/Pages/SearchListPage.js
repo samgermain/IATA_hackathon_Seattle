@@ -70,7 +70,9 @@ class SearchListPage extends React.Component {
 
         return (
             <View>
+                <View style={styles.header}>
                 <SliderBox/>
+                </View>
                 <ScrollView>
                     {navigation.getParam('request').offers.filter(offer => offer.price <= store.getState().price.price).filter(offer => offer.overallRating >= store.getState().rating.rating).map(booking => { randomKey=randomKey+1; return <BookingCell key={randomKey} navigation={navigation} booking={booking} shoppingID={navigation.getParam('request').shoppingID}/>})}
                 </ScrollView>
@@ -85,6 +87,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     overflow: 'hidden',
+
+    
 
   },
   bookingCellContainer: {
@@ -112,8 +116,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  fdTop: {
-
+  header: {
+    backgroundColor: '#EFE',
   },
   flightDetails: {
       flexDirection: "row",

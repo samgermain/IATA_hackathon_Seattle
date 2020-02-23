@@ -80,9 +80,10 @@ const RatingBox = (props) => {
   const actor = props.rating.actor
   const numberOfReview = props.rating.numberOfReview
   const rating = props.rating.rate
+  const type = props.rating.type
   return (
     <View style={styles.ratingBox}>
-      {/* <TypeLabel type={type} />  */}
+       <TypeLabel type={type} />  
       <View style={styles.ratingAtt}><Text>{actor}</Text></View>
       <View style={styles.ratingAtt}>
         <StarRating
@@ -138,7 +139,9 @@ const styles = StyleSheet.create({
     height: 50,
     textAlign: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    
   },
   ratingBox: {
     justifyContent: 'space-around',
@@ -148,6 +151,9 @@ const styles = StyleSheet.create({
   },
   ratings:{
     width: '100%'
+
+
+    
   },
   typeOverlay:{
     width: '100%',
