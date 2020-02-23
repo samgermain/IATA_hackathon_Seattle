@@ -54,7 +54,7 @@ export class ProfilePage extends Component {
               }}
             />
             <View style={styles.infoContent}>
-              <Text style={styles.info}>Whellchair setting</Text>
+              <Text style={styles.info}>Wheelchair setting</Text>
             </View>
           </View>
           <View style={styles.item}>

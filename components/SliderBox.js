@@ -17,9 +17,9 @@ class SliderBox extends React.Component {
                 {/* <Slider onValueChange={value => this.setState({price:Math.round(value*100)/100})}  value={2000} minimumValue={0} maximumValue={2000} style={{width: 200, height: 40}} />  */}
                 {/* {() => store.dispatch(setPrice({price:this.state.price}))}
                  */}
-                <Text>Price: {this.state.price}</Text>
+                <Text style={styles.bold}>Price: {this.state.price}</Text>
                 <Slider onValueChange={value => this.setState({rating:Math.round(value*10)/10})} value={this.state.rating} minimumValue={0} maximumValue={5} style={{width: 200, height: 40}} />
-                <Text>Minimum Rating: {this.state.rating}</Text>
+                <Text style={styles.bold}>Minimum Rating: {this.state.rating}</Text>
 
             </View>
         );
@@ -29,6 +29,10 @@ class SliderBox extends React.Component {
 const styles = StyleSheet.create({
     container:{
         alignItems: 'center'
+    },
+    bold:{
+        fontWeight: 'bold',
+        fontSize: 18
     }
 })
 
