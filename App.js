@@ -12,12 +12,14 @@ import AttributePage from './components/Pages/AttributePage'
 import ErrorPage from './components/Pages/ErrorPage'
 import ProfilePage from './components/Pages/ProfilePage'
 import BookingPage from './components/Pages/BookingPage'
+import ConfirmationPage from './components/Pages/ConfirmationPage';
 
 const StackNavigator = createStackNavigator({
   Search: SearchPage,
   SearchList: SearchListPage,
   Flight: FlightPage,
   Att: AttributePage,
+  Confirmation: ConfirmationPage,
   Error: ErrorPage
 },{
   initialRouteName: 'Search'
