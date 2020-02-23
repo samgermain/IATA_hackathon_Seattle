@@ -6,11 +6,11 @@ import { StyleSheet, TouchableOpacity, Text} from 'react-native';
  * @param {*} params 
  */
 const fetchRequest = async (params) => {
-    console.log(params)
+//    console.log(params)
     const origin=params.origin //BCN
     const destination=params.destination //LHR
     const departureDate=params.departureDate //2020-06-20
-    let url = "http://10.60.88.180:8080/api/search-availability?origin=" + origin + "&destination=" + destination + "&departureDate=" + departureDate
+    let url = "http://10.60.88.31:8080/api/search-availability?origin=" + origin + "&destination=" + destination + "&departureDate=" + departureDate
     console.log(url)
 
     let response = await fetch(
@@ -25,7 +25,7 @@ const fetchRequest = async (params) => {
       let result = await response.json();
 
     //const result = await fetch(url)
-    console.log(result)
+    //console.log(result)
     return result
 }
 

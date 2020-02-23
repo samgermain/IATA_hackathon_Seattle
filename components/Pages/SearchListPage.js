@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { TouchableOpacity, StyleSheet, ScrollView, Text, View } from 'react-native';
 import SliderBox from '../SliderBox'
+import store from '../../redux/store'
+import StarRating from 'react-native-star-rating';
+
 
 const FlightDetails = (props) => {
     const flight=props.flight
@@ -37,7 +41,16 @@ const BookingCell = (props) => {
                 </View>
                 <View style={styles.bookingCellRight}>
                     <Text>${props.booking.price}</Text>
-                    <Text>{props.booking.overallRating}</Text>
+                    <View style={styles.stars}>
+                        <StarRating
+                            disabled={true}
+                            maxStars={5}
+                            starSize={10}
+                            rating={props.booking.overallRating}
+                            selectedStar={(rating) => this.onStarRatingPress(rating)}
+                        />
+                    </View>
+                    {/* <Text>{props.booking.overallRating}</Text> */}
                 </View>
     {/*            <Text>{props.booking.ratingDetails}</Text> */}
             </View>
@@ -46,14 +59,16 @@ const BookingCell = (props) => {
 }
 
 class SearchListPage extends React.Component {
+
     render(){
         const { navigation } = this.props;
         let randomKey=1
+
         return (
             <View>
                 <SliderBox/>
                 <ScrollView>
-                    {navigation.getParam('request').offers.filter(offer => offer.price < 500).map(booking => { randomKey=randomKey+1; return <BookingCell key={randomKey} navigation={navigation} booking={booking}/>})}
+                    {navigation.getParam('request').offers.filter(offer => offer.price < store.getState().price.price).filter(offer => offer.overallRating > store.getState().rating.rating).map(booking => { randomKey=randomKey+1; return <BookingCell key={randomKey} navigation={navigation} booking={booking}/>})}
                 </ScrollView>
             </View>
         );
@@ -105,7 +120,11 @@ const styles = StyleSheet.create({
   locations:{
       margin: 10,
       fontSize: 16
+  },
+  stars: {
+      maxWidth: 60,
+      alignItems: 'center'
   }
 });
 
-export default SearchListPage
+export default SearchListPage;
