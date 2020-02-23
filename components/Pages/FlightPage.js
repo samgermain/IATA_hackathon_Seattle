@@ -6,6 +6,7 @@ class FlightPage extends React.Component {
   render(){
     const { navigation } = this.props
     const booking = navigation.state.params.booking
+    const recSeat = booking.recommendedSeat
     const flights = booking.flights
     const price = booking.price
     const itemID = booking.itemID
@@ -40,6 +41,7 @@ class FlightPage extends React.Component {
         <View style={styles.ratings}>
           {ratings.map(rating => <RatingBox key={rating.actor} rating={rating}/>)}
         </View>
+        <Text>Recommended Seat: {recSeat}</Text>
         <TouchableOpacity 
             style={styles.bookButton}
             onPress={async () => {

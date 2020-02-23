@@ -1,84 +1,100 @@
-import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import SliderBox from '../SliderBox'
-import SearchButton from '../SearchButton'
+import React from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import SliderBox from "../SliderBox";
+import SearchButton from "../SearchButton";
+import RNPickerSelect from "react-native-picker-select";
+import { airportList, getAirportCityNameAndCodeMap } from "../AirportList.js";
 
-const SearchText = (props) => {
-  return <View style={styles.searchText}><Text>{props.text}</Text></View>
-}
+const SearchText = props => {
+  return (
+    <View style={styles.searchText}>
+      <Text>{props.text}</Text>
+    </View>
+  );
+};
 
 class SearchBox extends React.Component {
-
-  constructor(props){
-    super(props)
-    this.navigation = props.navigation
+  constructor(props) {
+    super(props);
+    this.navigation = props.navigation;
   }
 
-    render(){
-      state:{
-        origin:"";
-        destination:"";
-        departureDate:""
+  render() {
+    state: {
+      origin: "";
+      destination: "";
     }
     return (
-        <View style={styles.searchBox}>
-            <View style={styles.searchRow}>
-                <SearchText text="From: " />
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({origin:text})} ></TextInput>
-            </View>
-            <View style={styles.searchRow}>
-                <SearchText text="To: " />
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({destination:text})} ></TextInput>
-            </View>
-            <View style={styles.searchRow}>
-                <SearchText text="Date : " />
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({departureDate:text})} ></TextInput>
-                {/* <Text style={styles.searchText}>→</Text>
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({endDate:text})} ></TextInput> */}
-            </View>
-            <SliderBox />
-            <SearchButton navigation={this.navigation} getArguments={this.state} />
+      <View style={styles.searchBox}>
+        <View style={styles.searchRow}>
+          <SearchText text="From: " />
+          {/* <TextInput style={styles.searchField} onChangeText={text => this.setState({origin:text})} ></TextInput> */}
+          <RNPickerSelect
+            style={styles.container}
+            onValueChange={label => this.setState({ origin: label })}
+            items={getAirportCityNameAndCodeMap(airportList)}
+          />
         </View>
-        );
-    }
+        <View style={styles.searchRow}>
+          <SearchText text="To: " />
+          <RNPickerSelect
+            style={styles.container}
+            onValueChange={label => this.setState({ destination: label })}
+            items={getAirportCityNameAndCodeMap(airportList)}
+          />
+        </View>
+        <View style={styles.searchRow}>
+          <SearchText text="Date : " />
+          {/* <DatePicker /> */}
+          <TextInput
+            style={styles.searchField}
+            onChangeText={text => this.setState({ departureDate: text })}
+          ></TextInput>
+          {/* <Text style={styles.searchText}>→</Text>
+                <TextInput style={styles.searchField} onChangeText={text => this.setState({endDate:text})} ></TextInput> */}
+        </View>
+        <SliderBox />
+        <SearchButton navigation={this.navigation} getArguments={this.state} />
+      </View>
+    );
+  }
 }
 
 /**
  * Page to search for flights and display the WC Grade for each flight
  */
 class SearchPage extends React.Component {
-  
-    state = {search:""}
+  state = { search: "" };
 
-    render(){
-        return (
-            <View style={styles.container}>
-                <SearchBox navigation={this.props.navigation} />
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <SearchBox navigation={this.props.navigation} />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#aaa',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#aaa",
+    alignItems: "center",
+    justifyContent: "center"
   },
   searchButton: {
     marginTop: 20,
-    backgroundColor: '#24D9E8',
+    backgroundColor: "#24D9E8",
     borderRadius: 5,
     padding: 5
   },
   searchBox: {
-    alignItems: "center",
+    alignItems: "center"
   },
   searchField: {
-      width: 100,
-      height: 25,
-      backgroundColor: '#fff'
+    width: 100,
+    height: 25,
+    backgroundColor: "#fff"
   },
   searchRow: {
     flexDirection: "row",
@@ -87,9 +103,9 @@ const styles = StyleSheet.create({
   },
   searchText: {
     width: 50,
-    justifyContent: 'center',
-    alignItems: 'flex-end'
+    justifyContent: "center",
+    alignItems: "flex-end"
   }
 });
 
-export default SearchPage
+export default SearchPage;
