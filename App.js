@@ -53,7 +53,7 @@ class App extends React.Component {
 
   render() {
     store.dispatch(setPrice({price:2000}))
-    store.dispatch(setRating({rating:1}))
+    store.dispatch(setRating({rating:0}))
     
     return (
       <AppContainer />

@@ -18,7 +18,7 @@ class SliderBox extends React.Component {
                 {/* {() => store.dispatch(setPrice({price:this.state.price}))}
                  */}
                 <Text>Price: {this.state.price}</Text>
-                <Slider onValueChange={value => this.setState({rating:Math.round(value*10)/10})} value={this.state.rating} minimumValue={1} maximumValue={5} style={{width: 200, height: 40}} />
+                <Slider onValueChange={value => this.setState({rating:Math.round(value*10)/10})} value={this.state.rating} minimumValue={0} maximumValue={5} style={{width: 200, height: 40}} />
                 <Text>Minimum Rating: {this.state.rating}</Text>
 
             </View>

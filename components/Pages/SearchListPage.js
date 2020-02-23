@@ -30,11 +30,13 @@ const FlightDetails = (props) => {
 
 const BookingCell = (props) => {
     let randomKey = 0
+    const warning = props.booking.suitableForTravellerWheelchair ? <View></View> : <Text style={styles.warning}>Warning: Not suitable for your wheelchair</Text>
     return (
         <TouchableOpacity 
             style={styles.bookingCellContainer}
             onPress={() => props.navigation.navigate("Flight", {booking: props.booking, shoppingID: props.shoppingID})}
         >
+        <View>
             <View style={styles.bookingCell}>
                 <View>
                     {props.booking.flights.map(flight => {randomKey=randomKey+1; return <FlightDetails key={randomKey} flight={flight} />})}
@@ -54,6 +56,8 @@ const BookingCell = (props) => {
                 </View>
     {/*            <Text>{props.booking.ratingDetails}</Text> */}
             </View>
+            {warning}
+            </View>
         </TouchableOpacity>
     );
 }
@@ -68,7 +72,7 @@ class SearchListPage extends React.Component {
             <View>
                 <SliderBox/>
                 <ScrollView>
-                    {navigation.getParam('request').offers.filter(offer => offer.price < store.getState().price.price).filter(offer => offer.overallRating > store.getState().rating.rating).map(booking => { randomKey=randomKey+1; return <BookingCell key={randomKey} navigation={navigation} booking={booking} shoppingID={navigation.getParam('request').shoppingID}/>})}
+                    {navigation.getParam('request').offers.filter(offer => offer.price <= store.getState().price.price).filter(offer => offer.overallRating >= store.getState().rating.rating).map(booking => { randomKey=randomKey+1; return <BookingCell key={randomKey} navigation={navigation} booking={booking} shoppingID={navigation.getParam('request').shoppingID}/>})}
                 </ScrollView>
             </View>
         );
@@ -96,6 +100,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginTop: 10,
+    alignItems: 'center'
 
   },
   bookingCellRight: {
@@ -124,6 +129,10 @@ const styles = StyleSheet.create({
   stars: {
       maxWidth: 60,
       alignItems: 'center'
+  },
+  warning:{
+      color: 'red',
+      textAlign: 'center'
   }
 });
 
