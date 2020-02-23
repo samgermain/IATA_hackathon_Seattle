@@ -22,23 +22,48 @@ export class ProfilePage extends Component {
 
         <View style={styles.body}>
           <View style={styles.item}>
+            <Image
+              style={styles.icon}
+              source={{
+                uri: "https://image.flaticon.com/icons/png/512/70/70370.png"
+              }}
+            />
             <View style={styles.infoContent}>
               <Text style={styles.info}>Home</Text>
             </View>
           </View>
 
           <View style={styles.item}>
+            <Image
+              style={styles.icon}
+              source={{
+                uri: "https://img.icons8.com/wired/64/000000/contract-job.png"
+              }}
+            />
             <View style={styles.infoContent}>
               <Text style={styles.info}>Profile</Text>
             </View>
           </View>
 
           <View style={styles.item}>
+            <Image
+              style={styles.icon}
+              source={{
+                uri:
+                  "https://cdn3.iconfinder.com/data/icons/disability-accessibility/100/disabled-01-512.png"
+              }}
+            />
             <View style={styles.infoContent}>
               <Text style={styles.info}>Whellchair setting</Text>
             </View>
           </View>
           <View style={styles.item}>
+            <Image
+              style={styles.icon}
+              source={{
+                uri: " https://image.flaticon.com/icons/png/512/707/707675.png"
+              }}
+            />
             <View style={styles.infoContent}>
               <Text style={styles.info}>Reviews</Text>
             </View>
