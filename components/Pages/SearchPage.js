@@ -3,32 +3,44 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import SliderBox from '../SliderBox'
 import SearchButton from '../SearchButton'
 
-const SearchBox = (props) => {
+const SearchText = (props) => {
+  return <View style={styles.searchText}><Text>{props.text}</Text></View>
+}
 
-    state:{
-        from:"";
-        to:"";
-        startDate:"";
-        endDate:""
+class SearchBox extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.navigation = props.navigation
+  }
+
+    render(){
+      state:{
+        origin:"";
+        destination:"";
+        departureDate:""
     }
-
     return (
         <View style={styles.searchBox}>
             <View style={styles.searchRow}>
-                <Text>From</Text>
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({from:text})} ></TextInput>
-                <Text>To</Text>
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({to:text})} ></TextInput>
+                <SearchText text="From: " />
+                <TextInput style={styles.searchField} onChangeText={text => this.setState({origin:text})} ></TextInput>
             </View>
             <View style={styles.searchRow}>
-                <Text>Dates</Text>
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({startDate:text})} ></TextInput>
-                <Text>→</Text>
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({endDate:text})} ></TextInput>
+                <SearchText text="To: " />
+                <TextInput style={styles.searchField} onChangeText={text => this.setState({destination:text})} ></TextInput>
             </View>
-            <SearchButton navigation={props.navigation} getArguments={this.state} />
+            <View style={styles.searchRow}>
+                <SearchText text="Date : " />
+                <TextInput style={styles.searchField} onChangeText={text => this.setState({departureDate:text})} ></TextInput>
+                {/* <Text style={styles.searchText}>→</Text>
+                <TextInput style={styles.searchField} onChangeText={text => this.setState({endDate:text})} ></TextInput> */}
+            </View>
+            <SliderBox />
+            <SearchButton navigation={this.navigation} getArguments={this.state} />
         </View>
         );
+    }
 }
 
 /**
@@ -42,7 +54,6 @@ class SearchPage extends React.Component {
         return (
             <View style={styles.container}>
                 <SearchBox navigation={this.props.navigation} />
-                <SliderBox />
             </View>
         );
     }
@@ -65,14 +76,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   searchField: {
-      width: 50,
+      width: 100,
       height: 25,
       backgroundColor: '#fff'
   },
   searchRow: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    margin: 10
   },
+  searchText: {
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  }
 });
 
 export default SearchPage

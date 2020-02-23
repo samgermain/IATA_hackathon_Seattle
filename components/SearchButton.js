@@ -6,11 +6,26 @@ import { StyleSheet, TouchableOpacity, Text} from 'react-native';
  * @param {*} params 
  */
 const fetchRequest = async (params) => {
-//    let url = "../../example.json"
-//    const response = await fetch(url)
-//    console.log(response)
-//    const result = await response.json()
-    const result = require("../example.json")
+    console.log(params)
+    const origin=params.origin //BCN
+    const destination=params.destination //LHR
+    const departureDate=params.departureDate //2020-06-20
+    let url = "http://10.60.88.180:8080/api/search-availability?origin=" + origin + "&destination=" + destination + "&departureDate=" + departureDate
+    console.log(url)
+
+    let response = await fetch(
+        url,
+          {
+            method: "get",
+            headers: {
+              'Content-Type': 'application/json' // we will be sending JSON
+            }
+          }
+      );
+      let result = await response.json();
+
+    //const result = await fetch(url)
+    console.log(result)
     return result
 }
 
@@ -43,7 +58,7 @@ const SearchButton = props => (
  */
 async function search(getArguments,navigation){
     let request = await fetchRequest(getArguments)
-    if (request.error === 0){
+    if (request.errorCode === 0){
         navigation.navigate('SearchList', {request: request, getArguments: getArguments})
     }else{
         //If the search returned no results, navigate to the error screen
