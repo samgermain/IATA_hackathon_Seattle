@@ -55,8 +55,8 @@ class FlightPage extends React.Component {
                   }
               );
               let result = await response.json();
-              console.log(result)
-              navigation.navigate("Flight", {booking: booking})}
+              console.log(result.order)
+              navigation.navigate("Confirmation", {confNum: result.order})}
             }
         >
             <Text>Book!</Text>
