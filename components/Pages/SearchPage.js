@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import SliderBox from '../SliderBox'
 import SearchButton from '../SearchButton'
+import RNPickerSelect from 'react-native-picker-select'
+import {airportList, getAirportCityNameAndCodeMap} from '../AirportList.js'
+import DatePicker from '../MyDatePicker'
 
 const SearchText = (props) => {
   return <View style={styles.searchText}><Text>{props.text}</Text></View>
@@ -18,20 +21,29 @@ class SearchBox extends React.Component {
       state:{
         origin:"";
         destination:"";
-        departureDate:""
     }
     return (
         <View style={styles.searchBox}>
             <View style={styles.searchRow}>
                 <SearchText text="From: " />
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({origin:text})} ></TextInput>
+                {/* <TextInput style={styles.searchField} onChangeText={text => this.setState({origin:text})} ></TextInput> */}
+                <RNPickerSelect
+                  style={styles.container}
+                  onValueChange={(label) => this.setState({origin:label})}
+                  items={getAirportCityNameAndCodeMap(airportList)}
+                />
             </View>
             <View style={styles.searchRow}>
                 <SearchText text="To: " />
-                <TextInput style={styles.searchField} onChangeText={text => this.setState({destination:text})} ></TextInput>
+                <RNPickerSelect
+                  style={styles.container}
+                  onValueChange={(label) => this.setState({destination:label})}
+                  items={getAirportCityNameAndCodeMap(airportList)}
+                />
             </View>
             <View style={styles.searchRow}>
                 <SearchText text="Date : " />
+                {/* <DatePicker /> */}
                 <TextInput style={styles.searchField} onChangeText={text => this.setState({departureDate:text})} ></TextInput>
                 {/* <Text style={styles.searchText}>→</Text>
                 <TextInput style={styles.searchField} onChangeText={text => this.setState({endDate:text})} ></TextInput> */}

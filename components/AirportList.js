@@ -1,21 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import Constants from 'expo-constants';
-import RNPickerSelect from 'react-native-picker-select';
-import { StyleSheet } from 'react-native';
-export default class App extends React.Component {
-  getAirportCityNameAndCodeMap(airportList) {
-    let airportCityNameAndCodeMap = [];
-    airportList.forEach(airport => {
-      airportCityNameAndCodeMap.push({
-        label: airport.city + ' - ' + airport.iatacode,
-        value: airport.iatacode,
-      });
-    });
-    return airportCityNameAndCodeMap;
-  }
-  render() {
-    const airportList = [
+const airportList = [
       {
         name: 'Arlanda',
         city: 'Stockholm',
@@ -208,26 +192,20 @@ export default class App extends React.Component {
         icaocode: 'KSEA',
         iatacode: 'SEA',
       },
-    ];
-    return (
-      <View style={styles.container}>
-        <Text>Select Airport</Text>
-        <RNPickerSelect
-          style={styles.container}
-          onValueChange={(label) => console.log(label)}
-          items={this.getAirportCityNameAndCodeMap(airportList)}
-        />
-      </View>
-    );
-  }
-}
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 60,
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: 50,
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-});
+    ]
+
+    function getAirportCityNameAndCodeMap(airportList) {
+        let airportCityNameAndCodeMap = [];
+        airportList.forEach(airport => {
+          airportCityNameAndCodeMap.push({
+            label: airport.city + ' - ' + airport.iatacode,
+            value: airport.iatacode,
+          });
+        });
+        return airportCityNameAndCodeMap;
+    }
+
+    export {
+        airportList,
+        getAirportCityNameAndCodeMap
+    }
