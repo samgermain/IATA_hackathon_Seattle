@@ -5,7 +5,7 @@ export class BookingPage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Just Kidding</Text>
+
             </View>
         );
     }
