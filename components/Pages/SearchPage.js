@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View, ImageBackground } from 'react-native';
 import SliderBox from '../SliderBox'
 import SearchButton from '../SearchButton'
 import RNPickerSelect from 'react-native-picker-select'
@@ -23,23 +23,28 @@ class SearchBox extends React.Component {
         destination:"";
     }
     return (
+      <ImageBackground style={styles.background} source={require('../../assets/airplane.jpg')} style={{width: '100%', height: '100%'}}>
         <View style={styles.searchBox}>
             <View style={styles.searchRow}>
                 <SearchText text="From: " />
                 {/* <TextInput style={styles.searchField} onChangeText={text => this.setState({origin:text})} ></TextInput> */}
+                <View style={styles.searchForAirport}>
                 <RNPickerSelect
                   style={styles.container}
                   onValueChange={(label) => this.setState({origin:label})}
                   items={getAirportCityNameAndCodeMap(airportList)}
                 />
+                </View>
             </View>
             <View style={styles.searchRow}>
                 <SearchText text="To: " />
+                <View style={styles.searchForAirport}>
                 <RNPickerSelect
                   style={styles.container}
                   onValueChange={(label) => this.setState({destination:label})}
                   items={getAirportCityNameAndCodeMap(airportList)}
                 />
+                </View>
             </View>
             <View style={styles.searchRow}>
                 <SearchText text="Date : " />
@@ -51,6 +56,7 @@ class SearchBox extends React.Component {
             <SliderBox />
             <SearchButton navigation={this.navigation} getArguments={this.state} />
         </View>
+        </ImageBackground>
         );
     }
 }
@@ -72,9 +78,16 @@ class SearchPage extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  background:{
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 60
+  },
   container: {
     flex: 1,
-    backgroundColor: '#aaa',
+    
+    backgroundColor: '#a3eeff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -84,8 +97,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5
   },
+  searchForAirport: {
+    backgroundColor: 'white',
+    borderRadius: 1
+  },
   searchBox: {
     alignItems: "center",
+    marginTop: 60
   },
   searchField: {
       width: 100,
