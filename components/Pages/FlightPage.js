@@ -8,18 +8,23 @@ class FlightPage extends React.Component {
     const booking = navigation.state.params.booking
     const flights = booking.flights
     const price = booking.price
+    const itemID = booking.itemID
+    const offerID = booking.offerID
+    const shoppingID = navigation.state.params.shoppingID
     const overallRating = booking.overallRating
     const ratings = booking.ratingDetails
+    let randomKey=0
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.flightNames}>
             {flights.map(flight =>
-            <View style={styles.flightsAndDest}>
+            {randomKey=randomKey+1
+            return <View key={randomKey} style={styles.flightsAndDest}>
               <Text>{flight.airline} | {flight.flightNumber} | {flight.aircraftType}</Text>
               <Text style={styles.bold}>{flight.origin}→{flight.destination}</Text>
             </View>
-            )}
+            })}
           </View>
           <View style={styles.priceAndRating}>
             <Text style={styles.bold}>${price}</Text>
@@ -37,7 +42,22 @@ class FlightPage extends React.Component {
         </View>
         <TouchableOpacity 
             style={styles.bookButton}
-            onPress={() => props.navigation.navigate("Flight", {booking: props.booking})}
+            onPress={async () => {
+              let url = 'http://10.60.88.31:8080/api/book?offerID=' + offerID + '&price=' + price + '&itemID=' + itemID + '&shoppingID=' + shoppingID
+              //console.log(url)
+              let response = await fetch(
+                url,
+                  {
+                    method: "get",
+                    headers: {
+                      'Content-Type': 'application/json' // we will be sending JSON
+                    }
+                  }
+              );
+              let result = await response.json();
+              console.log(result)
+              navigation.navigate("Flight", {booking: booking})}
+            }
         >
             <Text>Book!</Text>
         </TouchableOpacity>
