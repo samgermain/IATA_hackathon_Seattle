@@ -10,7 +10,8 @@ const fetchRequest = async (params) => {
     const origin=params.origin //BCN
     const destination=params.destination //LHR
     const departureDate=params.departureDate //2020-06-20
-    let url = "http://10.60.88.31:8080/api/search-availability?origin=" + origin + "&destination=" + destination + "&departureDate=" + departureDate
+    const ip = 1
+    let url = "http://" + ip + ":8080/api/search-availability?origin=" + origin + "&destination=" + destination + "&departureDate=" + departureDate
     //console.log(url)
 
     let response = await fetch(
